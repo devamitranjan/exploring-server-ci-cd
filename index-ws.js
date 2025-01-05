@@ -18,14 +18,14 @@ const wss = new WebsocketServer({server});
 wss.on('connection', function connection(ws){
 	const totalClients = wss.clients.size;
 	console.log('Clients connected', totalClients);
-	wss.broadcast(`Current visitors: ${numClients}`);
+	wss.broadcast(`Current visitors: ${totalClients}`);
 	
 	if(ws.readyState === ws.OPEN){
 		ws.send('Welcome to my server');
 	}
 
 	ws.on('close', function close(){
-		wss.broadcast(`Current visitors: ${numClients}`);
+		wss.broadcast(`Current visitors: ${totalClients}`);
 		console.log('A client has disconnected');
 	});
 
